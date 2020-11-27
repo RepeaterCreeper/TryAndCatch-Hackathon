@@ -11,6 +11,12 @@ On your app directory (run on your terminal):
 2. Run migration: `php artisan migrate`
 
 3. Run `npm install && npm run dev`
+
+If encountered with error Run: `npm install --save-dev cross-env`
+
+Then Run: `npm install && npm run dev` again
+
+
 You're good to go!
 
 -Team TryAndCatch
