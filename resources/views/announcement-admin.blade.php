@@ -50,69 +50,29 @@
 
     <div class="row no-gutters">
         <div class="col-sm-12">
-            <div class="jumbotron">
-                <h1 class="display-4">Welcome back, Admin!</h1>
-                <p class="lead">There are <b>2 new users</b> pending approval since you were last online.</p>
-            </div>
+            <h1 class="m-4">Announcement</h1>
         </div>
-        <div class="col-sm-12 p-2">
-            <div>
-                <h2 style="margin-bottom: 0; display: flex; align-items: center; gap: 16px;">Pending Users <span style="font-size: 12pt;" class="badge badge-success">0</span></h2>
-                <small>These are all the pending users.</small>
-            </div>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Image ID</th>
-                        <th><th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Joseph</td>
-                        <td>Chua</td>
-                        <td><a href="#">View ID</a></td>
-                        <td>
-                            <button class="btn btn-danger"><i class="fas fa-ban"></i> Reject</button>
-                            <button class="btn btn-success"><i class="fas fa-check"></i> Approve</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Need an appointment?</h3>
-                    <p>Schedule one today.</p>
-                    <button class="btn btn-primary">Schedule an Appointment</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Get Documents</h3>
-                    <p>Do you require a document? View all documents that you can request.</p>
-                    <button class="btn btn-primary">View Documents</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Admin Support</h3>
-                    <p>Having problems? Need to chat with the admin?</p>
-                    <button class="btn btn-primary">Chat with Admin</button>
+        <div class="col-sm-6 my-2">
+            <button class="btn btn-primary mx-4 mb-4"><i class="fas fa-edit"></i> Post Announcement</button>
+
+            <div class="card mx-4 p-4 shadow bg-dark text-white">
+                <div class="card-content" style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; gap: 16px;">
+                        <div class="rounded-circle" style="width: 64px; height: 64px; background-color: red; display: flex; justify-content: center; align-items: center;">
+                            <h3 style="margin: 0;">J</h3>
+                        </div>
+                        <div style="display: flex; flex-direction: column; justify-content: center;">
+                            <h3 style="margin: 0;">Joseph Chua <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">Mayor</span></h3>
+                            <small>2 minutes ago</small>
+                        </div>  
+                    </div>
+                    <div>
+                        <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Optional JavaScript -->
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

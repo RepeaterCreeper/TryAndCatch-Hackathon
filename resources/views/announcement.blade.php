@@ -75,6 +75,12 @@
         <div class="col-sm-12">
             <h1 class="m-4">Recent Ka-Baranggay Posts</h1>
         </div>
+        <div class="col-sm-12">
+            <div class="col-sm-8 offset-sm-2">
+                <textarea class="form-control" rows="6" placeholder="Character limit of 150."></textarea>
+                <button class="btn btn-primary mt-2">Add Post</button>
+            </div>
+        </div>
         <div class="col-sm-6 my-2">
             <div class="card mx-4 p-4 shadow border-primary">
                 <div class="card-content" style="display: flex; flex-direction: column; gap: 16px;">
