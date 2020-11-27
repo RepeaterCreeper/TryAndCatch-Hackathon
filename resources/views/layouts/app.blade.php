@@ -28,20 +28,35 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Public)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Announcements & Posts (Public)</a>
+                    </li>
                     @auth
                         <li class="nav-item active">
-                            <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
+                            <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-home"></i> Home (User)<span
                                     class="sr-only">(current)</span></a>
                         </li>
+                        @if (auth()->user()->roles_id === 1)
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{route('admin.dashboard')}}"><i class="fas fa-tachometer-alt"></i> Admin Dashboard<span
+                                        class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{route('admin.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Admin)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Admin)</a>
+                            </li>
+                        @endif
                     @endauth
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
-                    </li>
                 </ul>
 
                 <ul class="ml-auto navbar-nav">
@@ -82,6 +97,7 @@
         </nav>
 
         <main class="py-4">
+            @include('flash.message')
             @yield('content')
         </main>
     </div>

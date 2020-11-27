@@ -34,16 +34,31 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Public)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Public)</a>
+                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
+                    <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-home"></i> Home (User)<span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
-                </li>
+                @if (auth()->user()->roles_id === 1)
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('admin.dashboard')}}"><i class="fas fa-tachometer-alt"></i> Admin Dashboard<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('admin.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Admin)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Admin)</a>
+                    </li>
+                @endif
             </ul>
             <ul class="ml-auto navbar-nav">
                 @guest
@@ -52,7 +67,6 @@
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
-
                     @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -61,7 +75,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->first_name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

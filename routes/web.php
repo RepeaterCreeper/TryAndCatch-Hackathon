@@ -14,15 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    return redirect('/announcement');
-});
-
-Route::get('/statistics', function() {
-    return view('statistics');
-});
-
-Route::get('/announcement', function() {
-    return view('announcement');
+    return redirect()->route('site.statistics');
 });
 
 Route::get('/announcement-admin', function() {
@@ -31,4 +23,16 @@ Route::get('/announcement-admin', function() {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/site', [App\Http\Controllers\SiteController::class, 'control'])->name('site.control');
+Route::get('/announcement', [App\Http\Controllers\SiteController::class, 'announcement'])->name('site.announcement');
+Route::get('/statistics', [App\Http\Controllers\SiteController::class, 'statistics'])->name('site.statistics');
+
+Route::get('/dashboard-admin', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/announcement-admin', [App\Http\Controllers\AdminController::class, 'announcement'])->name('admin.announcement');
+Route::get('/statistics-admin', [App\Http\Controllers\AdminController::class, 'statistics'])->name('admin.statistics');
+Route::get('/request/{email}', [App\Http\Controllers\AdminController::class, 'image'])->name('admin.view.image');
+Route::patch('/request/{user}', [App\Http\Controllers\AdminController::class, 'add'])->name('admin.add');
+Route::delete('/request/{user}', [App\Http\Controllers\AdminController::class, 'reject'])->name('admin.reject');
+
+Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard');
+Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');

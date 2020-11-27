@@ -34,18 +34,33 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                @auth
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                @endauth
-                <li class="nav-item active">
-                    <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Public)</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+                    <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Public)</a>
                 </li>
+                @auth
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-home"></i> Home (User)<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    @if (auth()->user()->roles_id === 1)
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('admin.dashboard')}}"><i class="fas fa-tachometer-alt"></i> Admin Dashboard<span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{route('admin.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Admin)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Admin)</a>
+                        </li>
+                    @endif
+                @endauth
             </ul>
             <ul class="navbar-nav ml-auto">
                 @guest
@@ -109,6 +124,12 @@
     <div class="row no-gutters">
         <div class="col-sm-12">
             <h1 class="m-4">Recent Ka-Baranggay Posts</h1>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-8 offset-sm-2">
+                <textarea class="form-control" rows="6" placeholder="Character limit of 150."></textarea>
+                <button class="btn btn-primary mt-2">Add Post</button>
+            </div>
         </div>
         <div class="col-sm-6 my-2">
             <div class="card mx-4 p-4 shadow border-primary">

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\AccountRequest;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/site';
 
 
     private $validated;
@@ -68,17 +67,19 @@ class RegisterController extends Controller
         return $validator;
     }
 
+
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create($data)
     {
-        return User::create([
+         $user = User::create([
             'first_name' => $data['first_name'],
             'roles_id' => 1,
+            'status' => false,
             'tag_id' => 1,
             'middle_name' => $data['middle_name'] ?? "",
             'last_name' => $data['last_name'],
@@ -89,6 +90,13 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if(request()->hasFile('valid_id')){
+            $fileName = request()->file('valid_id')->getClientOriginalName();
+            request()->file('valid_id')->storeAs('images',$user->email."/".$fileName,'public');
+            $user->update(['valid_id'=>$fileName]);
+        }
+        return $user;
     }
 
 

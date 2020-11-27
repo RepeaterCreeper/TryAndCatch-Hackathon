@@ -34,17 +34,28 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                @auth
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                @endauth
                 <li class="nav-item">
-                    <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
+                    <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Public)</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+                    <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Public)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-home"></i> Home (User)<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{route('admin.dashboard')}}"><i class="fas fa-tachometer-alt"></i> Admin Dashboard<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Admin)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Admin)</a>
                 </li>
             </ul>
 
@@ -103,23 +114,55 @@
                         <th scope="col">ID</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
+                        <th scope="col">Address</th>
                         <th scope="col">Image ID</th>
-                        <th><th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                @foreach ($users as $user)
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Joseph</td>
-                        <td>Chua</td>
-                        <td><a href="#">View ID</a></td>
+                        <th scope="row">{{$user->id}}</th>
+                        <td>{{$user->first_name}}</td>
+                        <td>{{$user->last_name}}</td>
+                        <td>{{$user->address}}</td>
+                        <td><a href="{{route('admin.view.image',$user->email)}}">View ID</a></td>
                         <td>
                             <button class="btn btn-danger"><i class="fas fa-ban"></i> Reject</button>
                             <button class="btn btn-success"><i class="fas fa-check"></i> Approve</button>
                         </td>
                     </tr>
+                @endforeach
+
                 </tbody>
             </table>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow m-2">
+                <div class="card-body">
+                    <h3 style="margin-bottom: 0; font-weight: bolder;">Need an appointment?</h3>
+                    <p>Schedule one today.</p>
+                    <button class="btn btn-primary">Schedule an Appointment</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow m-2">
+                <div class="card-body">
+                    <h3 style="margin-bottom: 0; font-weight: bolder;">Get Documents</h3>
+                    <p>Do you require a document? View all documents that you can request.</p>
+                    <button class="btn btn-primary">View Documents</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow m-2">
+                <div class="card-body">
+                    <h3 style="margin-bottom: 0; font-weight: bolder;">Admin Support</h3>
+                    <p>Having problems? Need to chat with the admin?</p>
+                    <button class="btn btn-primary">Chat with Admin</button>
+                </div>
+            </div>
         </div>
     </div>
 

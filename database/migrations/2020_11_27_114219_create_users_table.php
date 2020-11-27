@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->text('address');
             $table->text('valid_id');
             $table->string('email')->unique();
-            $table->boolean('status')->default(false);
+            $table->boolean('status');
             $table->string('phone_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
