@@ -34,17 +34,26 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+                    <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
                 </li>
             </ul>
         </div>
     </nav>
+
     <div class="row no-gutters">
+        <div class="col-sm-12">
+            <div class="alert alert-danger m-2">
+                <p style="margin: 0;"><b>Barangay Daan Pare</b> is currently experiencing power outage.</p>
+            </div>
+        </div>
         <div class="col-sm-4">
             <div class="card shadow m-2 bg-danger">
                 <div class="card-body">
