@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccountRequest;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -31,6 +32,8 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
+    private $validated;
     /**
      * Create a new controller instance.
      *
@@ -49,11 +52,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+        //Were not gonna use this at all
+        $validator = Validator::make($data, [
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'birthdate' => ['required', 'date'],
+            'address' => ['required', 'string', 'max:500'],
+            'valid_id' => ['required','image'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'phone_number' => ['required', 'numeric', 'digits_between:11,12', 'unique:users'],
+            'password' => ['required', 'string', 'min:1', 'confirmed'],
+            ]);
+            $this->validated = $validator;
+        return $validator;
     }
 
     /**
@@ -65,9 +77,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'roles_id' => 1,
+            'tag_id' => 1,
+            'middle_name' => $data['middle_name'] ?? "",
+            'last_name' => $data['last_name'],
+            'birthdate' => $data['birthdate'],
+            'address' => $data['address'],
+            'valid_id' => $data['valid_id'],
             'email' => $data['email'],
+            'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
     }
+
+
 }
