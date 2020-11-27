@@ -34,15 +34,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
+                <li class="nav-item ">
+                    <a class="nav-link" href="/dashboard-admin"><i class="fas fa-home"></i> Dashboard<span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/announcement-admin"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+                    <a class="nav-link" href="/statistics-admin"><i class="fas fa-chart-bar"></i> Statistics</a>
                 </li>
             </ul>
         </div>

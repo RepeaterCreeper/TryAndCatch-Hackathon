@@ -10,9 +10,8 @@ Admin Features:
 
 
 Public User Features:
-The user can publicy view the updates about their baranggay (Power Outage, Covid Case update, Checkpoints, etc).These are posted by the admin.
-
-The user can publicy view the dashboard including the categories of announcement tab(Covid Updates, Schedules of Brgy,etc), And also a graph representation of Covid Updates(Total case, Recent/New cases)
+[ ] The user can publicy view the updates about their baranggay (Power Outage, Covid Case update, Checkpoints, etc).These are posted by the admin.
+[ ] The user can publicy view the dashboard including the categories of announcement tab(Covid Updates, Schedules of Brgy,etc), And also a graph representation of Covid Updates(Total case, Recent/New cases)
 
 Private User Features:
 [x] Can schedule appointment
