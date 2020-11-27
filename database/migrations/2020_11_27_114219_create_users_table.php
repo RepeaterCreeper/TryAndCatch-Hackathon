@@ -39,6 +39,7 @@ class CreateUsersTable extends Migration
             [
                 'roles_id'=> 1,
                 'tag_id'=> 1,
+                'status'=> 1,
                 'first_name'=> 'John Cena',
                 'middle_name'=> 'Brax',
                 'last_name'=> 'Zoe',

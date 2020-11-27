@@ -34,16 +34,51 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
-                            class="sr-only">(current)</span></a>
-                </li>
+                @auth
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                @endauth
                 <li class="nav-item active">
                     <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
+
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->first_name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
             </ul>
         </div>
     </nav>
@@ -62,7 +97,7 @@
                         <div style="display: flex; flex-direction: column; justify-content: center;">
                             <h3 style="margin: 0;">Joseph Chua <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">Mayor</span></h3>
                             <small>2 minutes ago</small>
-                        </div>  
+                        </div>
                     </div>
                     <div>
                         <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
@@ -85,7 +120,7 @@
                         <div style="display: flex; flex-direction: column; justify-content: center;">
                             <h3 style="margin: 0;">Darwin Marcello <span class="text-white badge badge-pill badge-small bg-warning" style="font-size: 12pt;">Developer</span></h3>
                             <small>5 minutes ago</small>
-                        </div>  
+                        </div>
                     </div>
                     <div>
                         <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
@@ -103,7 +138,7 @@
                         <div style="display: flex; flex-direction: column; justify-content: center;">
                             <h3 style="margin: 0;">Justin Jhun Quilit <span class="text-white badge badge-pill badge-small bg-info" style="font-size: 12pt;">UX Designer</span></h3>
                             <small>5 minutes ago</small>
-                        </div>  
+                        </div>
                     </div>
                     <div>
                         <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
@@ -121,7 +156,7 @@
                         <div style="display: flex; flex-direction: column; justify-content: center;">
                             <h3 style="margin: 0;">Csyronne Galang <span class="text-white badge badge-pill badge-small bg-danger" style="font-size: 12pt;">UX Designer</span></h3>
                             <small>5 minutes ago</small>
-                        </div>  
+                        </div>
                     </div>
                     <div>
                         <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>

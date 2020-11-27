@@ -107,6 +107,11 @@
                         <td style="max-width: 256px;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora veniam, accusamus minus dicta aut voluptas ipsum, voluptatum dolorum maiores iste tenetur sed. Consequuntur ea optio dolore quidem accusantium corrupti autem!</td>
                         <td>11/27/2020 11:40:00pm</td>
                     </tr>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td style="max-width: 256px;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora veniam, accusamus minus dicta aut voluptas ipsum, voluptatum dolorum maiores iste tenetur sed. Consequuntur ea optio dolore quidem accusantium corrupti autem!</td>
+                        <td>11/27/2020 11:40:00pm</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

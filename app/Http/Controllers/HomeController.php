@@ -23,6 +23,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(auth()->user()->status == false){
+            \Auth::logout();
+            return redirect()->back();
+        }
+
+        if(auth()->user()->roles_id === 1)
+            return view('dashboard-admin');
+        else
+            return view('dashboard');
     }
 }
