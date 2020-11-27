@@ -25,6 +25,10 @@ Route::get('/announcement', function() {
     return view('announcement');
 });
 
+Route::get('/announcement-admin', function() {
+    return view('announcement-admin');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
