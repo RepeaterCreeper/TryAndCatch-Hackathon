@@ -34,9 +34,12 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link active" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard"><i class="fas fa-home"></i> Dashboard<span
                             class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/announcement"><i class="fas fa-bullhorn"></i> Announcements & Posts</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
@@ -44,9 +47,10 @@
             </ul>
         </div>
     </nav>
+
     <div class="row no-gutters">
         <div class="col-sm-12">
-            <h1 class="m-4">Highlights</h1>
+            <h1 class="m-4">Announcement</h1>
         </div>
         <div class="col-sm-6 my-2">
             <div class="card mx-4 p-4 shadow bg-dark text-white">
