@@ -1,0 +1,40 @@
+1. Brgy Monitoring Social Media App
+Features:
+Admin Features:
+[x] Can post announcement
+[x] Edit/update announcement
+[x] Delete announcement (status=false in database)
+[x] Populations
+[x] Recent Covid Case
+[x] Total Covid Case
+
+
+Public User Features:
+The user can publicy view the updates about their baranggay (Power Outage, Covid Case update, Checkpoints, etc).These are posted by the admin.
+
+The user can publicy view the dashboard including the categories of announcement tab(Covid Updates, Schedules of Brgy,etc), And also a graph representation of Covid Updates(Total case, Recent/New cases)
+
+Private User Features:
+[x] Can schedule appointment
+[x] Can directly message the admin
+[x] Can Post live update(Need approval of admin)
+
+Tags:(Must read End users Agreement)[Approval from admin]
+Brgy Captain
+Resident
+Infected(Requires Approval of user)
+Mayor
+
+Darwin (SK)
+Josh(Brgy Tanod)
+
+There are 2 different tabs for posting (Announcement|Public post)
+
+Suggestions:
+Simlar to Down Detector Features(Reporting a certain thing)
+The user can communicate ask help for the brgy members(Buy for them, Fix things)
+SMS notification about updates of brgy(because some might not have an Internet Connection)
+Dont just focus on pandemic
+Determine the Functions of brgy
+Make brgy connected to each other
+Chatbot (Automatic response) for Mental Issue

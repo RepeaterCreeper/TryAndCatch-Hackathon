@@ -53,18 +53,24 @@
             <h1 class="m-4">Announcement</h1>
         </div>
         <div class="col-sm-6 my-2">
-            <button class="btn btn-primary mx-4 mb-4"><i class="fas fa-edit"></i> Post Announcement</button>
-
+            <div class="mx-4">
+                <textarea class="form-control"></textarea>
+                <button class="btn btn-primary mt-2 mb-4"><i class="fas fa-edit"></i> Post Announcement</button>
+            </div>
             <div class="card mx-4 p-4 shadow bg-dark text-white">
                 <div class="card-content" style="display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; gap: 16px;">
                         <div class="rounded-circle" style="width: 64px; height: 64px; background-color: red; display: flex; justify-content: center; align-items: center;">
                             <h3 style="margin: 0;">J</h3>
                         </div>
-                        <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
                             <h3 style="margin: 0;">Joseph Chua <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">Mayor</span></h3>
                             <small>2 minutes ago</small>
-                        </div>  
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 8px; align-items: center;">
+                            <button class="btn btn-warning" style="height: fit-content;"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger" style="height: fit-content;"><i class="fas fa-trash"></i></button>
+                        </div>
                     </div>
                     <div>
                         <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
