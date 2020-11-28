@@ -96,6 +96,6 @@ class AdminController extends Controller
 
     public function statistics()
     {
-        return "Hello";
+        return view('statistics-admin');
     }
 }
