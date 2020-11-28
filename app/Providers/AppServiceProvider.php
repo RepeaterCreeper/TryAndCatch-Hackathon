@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Notification;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+//        Schema::defaultStringLength(191);
+
         $notifs = Notification::where(['status'=>true])->orderBy('created_at','desc')->limit(2)->get();
         view()->share('notifs',$notifs);
     }
