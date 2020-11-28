@@ -107,7 +107,7 @@
                     <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror" id="customFile">
                     <label class="custom-file-label" for="customFile">Attach an image</label>
                 </div>
-                <textarea class="form-control  @error('caption') is-invalid @enderror" name="caption" placeholder="What's your message?"></textarea>
+                <textarea class="form-control  @error('caption') is-invalid @enderror"  name="caption" placeholder="What's your message?"></textarea>
                 @error('caption')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -127,15 +127,24 @@
                                 <small>{{$post->created_at->diffForHumans()}}</small>
                             </div>
                             <div style="display: flex; justify-content: center; gap: 8px; align-items: center;">
-                                <button class="btn btn-warning" style="height: fit-content;"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger" style="height: fit-content;"><i class="fas fa-trash"></i></button>
+                                <div class="postTools" id="postTools-{{$post->id}}">
+                                    <button class="btn btn-warning" onclick="editInvoke('{{$post->caption}}','{{$post->id}}')" style="height: fit-content;"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" onclick="onDelete({{$post->id}})" style="height: fit-content;"><i class="fas fa-trash"></i></button>
+                                </div>
                             </div>
                         </div>
                         <div>
                             @if ($post->image)
                                 <img src="{{asset('storage/images/posts/'.$post->user->id.'/'.$post->image)}}" class="img-fluid my-4 w-50" alt="image">
                             @endif
-                            <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
+                            <p style="margin: 0;" id="caption-{{$post->id}}">{{$post->caption}}</p>
+                               <div id="editTools-{{$post->id}}" style="display: none">
+                                   <textarea id="edit-{{$post->id}}" class="form-control" ></textarea>
+                                    <div class="buttonsEdit mt-3 d-flex justify-content-end" id="editTools-{{$post->id}}">
+                                        <button class="btn btn-success" onclick="onUpdate({{$post->id}})" style="height: fit-content;"><i class="fas fa-check"></i></button>
+                                        <button class="btn btn-danger ml-2" onclick="editUnInvoke({{$post->id}})" style="height: fit-content;"><i class="fas fa-times"></i></button>
+                                    </div>
+                               </div>
                         </div>
                     </div>
                 </div>
@@ -147,8 +156,10 @@
 
         </div>
     </div>
-    <!-- Optional JavaScript -->
 
+    <script src="{{asset('js/app.js')}}"></script>
+    <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
@@ -161,11 +172,96 @@
     </script>
 
     <script>
+        function editInvoke(initialText,id){
+            const p = document.getElementById('caption-'+id)
+            const editField = document.getElementById("edit-"+id)
+
+            const editTools = document.getElementById("editTools-"+id);
+            const postTools = document.getElementById("postTools-"+id);
+            p.style.display = "none";
+            editField.innerText = p.innerText
+            postTools.style.display = "none";
+            editTools.style.display = "block";
+        }
+
+        function editUnInvoke(id){
+            const editTools = document.getElementById("editTools-"+id);
+            const postTools = document.getElementById("postTools-"+id);
+            const editField = document.getElementById("edit-"+id)
+            const p = document.getElementById('caption-'+id)
+            p.style.display = "block";
+
+            editField.innerText = "";
+            postTools.style.display = "block";
+            editTools.style.display = "none";
+        }
+
+        function onDelete(postID){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete('/post/admin/delete',{data:{id:postID}}).then(response=>{
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        ).then(e=>{
+                            location.reload();
+                        })
+                    });
+                }
+            })
+        }
+
+
+        function onUpdate(postID){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to update this post?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let editField = document.getElementById("edit-"+postID)
+                    console.log(editField);
+                    return ;
+                    const p = document.getElementById('caption-'+postID);
+                    axios.patch('post/admin/update',{id:postID,caption:caption.innerText}).then(response=>{
+                        p.innerText = caption.innerText
+                        const editTools = document.getElementById("editTools-"+id);
+                        editTools.style.display = "none";
+                        Swal.fire(
+                            'Updated!',
+                            'Your Post has been updated.',
+                            'success'
+                        ).then(e=>{
+                            // location.reload();
+                        })
+                    });
+                }
+            })
+        }
+
+    </script>
+
+    <script>
+
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
+
 </body>
 
 </html>

@@ -33,7 +33,9 @@ Route::get('/statistics-admin', [App\Http\Controllers\AdminController::class, 's
 Route::get('/request/{email}', [App\Http\Controllers\AdminController::class, 'image'])->name('admin.view.image');
 Route::patch('/request/{user}', [App\Http\Controllers\AdminController::class, 'add'])->name('admin.add');
 Route::delete('/request/{user}', [App\Http\Controllers\AdminController::class, 'reject'])->name('admin.reject');
-Route::post('/post/store', [App\Http\Controllers\AdminController::class, 'post'])->name('admin.post.store');
+Route::post('/post/admin/store', [App\Http\Controllers\AdminController::class, 'post'])->name('admin.post.store');
+Route::patch('/post/admin/update', [App\Http\Controllers\AdminController::class, 'update'])->name('admin.post.update');
+Route::delete('/post/admin/delete', [App\Http\Controllers\AdminController::class, 'delete'])->name('admin.post.delete');
 
 Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard');
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');

@@ -21,6 +21,23 @@ class AdminController extends Controller
         return view('dashboard-admin',compact('users'));
     }
 
+    public function delete(Request $request)
+    {
+        $post = Post::find($request->id);
+        $post->update(['status'=>false]);
+        return response(['message'=>"Post has been deleted"]);
+    }
+
+    public function update(Request $request)
+    {
+        $post = Post::find($request->id);
+        var_dump($request->all());
+        exit;
+        $post->update(['caption'=>$request->caption]);
+        return response(['message'=>"Post has been updated!"]);
+    }
+
+
     public function post(Request $request)
     {
         $rules = [
@@ -44,7 +61,8 @@ class AdminController extends Controller
         auth()->user()->posts()->create([
             'caption' => $validator->validated()['caption'],
             'image' => $fileName ?? null,
-            'roles_id'=> auth()->user()->roles_id
+            'roles_id'=> auth()->user()->roles_id,
+            'status'=>true
         ]);
 
         return redirect()->back()->with('message',"Your post has been published to the community");
@@ -59,7 +77,7 @@ class AdminController extends Controller
 
     public function announcement()
     {
-        $posts = Post::where(['roles_id'=>auth()->user()->roles_id])->orderBy('created_at','desc')->get();
+        $posts = Post::where(['roles_id'=>auth()->user()->roles_id,'status'=>true])->orderBy('created_at','desc')->get();
         return view('announcement-admin',compact('posts'));
     }
 
