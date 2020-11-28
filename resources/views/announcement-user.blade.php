@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div>
-                            <img src="{{asset('storage/images/posts/'.$announcement->user->id. "/". $announcement->image)}}" alt="" class="img-fluid w-75">
+                            <img src="{{asset('storage/images/posts/'.$announcement->user->id. "/". $announcement->image)}}" alt="" class="img-fluid w-25">
                             <p style="margin: 0;">{{$announcement->caption}}</p>
                         </div>
                     </div>
