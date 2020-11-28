@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CovidCase;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Report;
 use App\Models\User;
@@ -234,5 +235,11 @@ class AdminController extends Controller
         auth()->user()->notif()->create($validated);
 
         return redirect()->back()->with('message','Notification has been pushed to the whole application');
+    }
+
+    public function deleteNotif(Notification $notif)
+    {
+        $notif->update(['status'=>false]);
+        return redirect()->back()->with('message','Notification has been removed.');
     }
 }

@@ -2,11 +2,6 @@
 @section('content')
     @include('flash.message')
     <div class="row no-gutters">
-        <div class="col-sm-12">
-            <div class="alert alert-danger m-2">
-                <p style="margin: 0;"><b>Barangay Daan Pare</b> is currently experiencing power outage.</p>
-            </div>
-        </div>
         <div class="col-sm-3">
             <div class="card shadow m-2 bg-warning">
                 <div class="card-body">
