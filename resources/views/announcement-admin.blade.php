@@ -234,7 +234,7 @@
                 if (result.isConfirmed) {
                     let editField = document.getElementById("edit-"+postID)
                     console.log(editField);
-                    return ;
+                    return;
                     const p = document.getElementById('caption-'+postID);
                     axios.patch('post/admin/update',{id:postID,caption:caption.innerText}).then(response=>{
                         p.innerText = caption.innerText
