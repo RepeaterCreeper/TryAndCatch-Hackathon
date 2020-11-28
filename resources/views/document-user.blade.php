@@ -115,13 +115,14 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Document Selection</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" id="document-selection">
                             <option default selected disabled>Please select a document...</option>
-                            <option>Barangay Clearance</option>
-                            <option>Birth Certificate</option>
-                            <option>Kahit Anong Document</option>
-                            <option>Basta Relevant sa Barangay</option>
-                            <option>Population Documentation</option>
+                            <option value="certresidency">Certificate of Residency</option>
+                            <option value="certvalidid">Certificate of Valid ID</option>
+                            <option value="certguardianship">Certification of Guardianship</option>
+                            <option value="brgclearance">Barangay Clearance</option>
+                            <option value="brgclearance_installation">Barangay Clearance for Installation</option>
+                            <option value="brgclearance_businesspermit">Barangay Clearance for Business Permit Application</option>
                         </select>
                     </div>
                 </div>
@@ -130,33 +131,19 @@
         <div class="col col-sm-12">
             <div class="card shadow m-2">
                 <div class="card-header">
-                    <h3>Document Preview</h3>
+                    <h3>Document Preview - <span>Barangay Clearance</span></h3>
                     <p>This is the form you need to fill out to request for the selected document.</p>
                 </div>
                 <div class="card-body">
                     <form>
-                        <div class="form-row">
-                            <div class="form-group col-sm-5">
-                                <label for="first_name">First Name</label>
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First name">
-                            </div>
-                            <div class="form-group col-sm-2">
-                                <label for="middle_initial">Middle Initial</label>
-                                <input type="text" class="form-control" name="middle_initial" id="middle_initial" placeholder="Middle Initial">
-                            </div>
-                            <div class="form-group col-sm-5">
-                                <label for="last_name">Last Name</label>
-                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last name">
-                            </div>
+                        <div data-id="document-data">
                         </div>
+                        <hr>
                         <div class="form-row">
                             <div class="form-group col-sm-12">
-                                <label for="suffix">Suffix</label>
-                                <input type="text" class="form-control" placeholder="Suffix" name="suffix" id="suffix">
-                            </div>
-                            <div class="form-group col-sm-12">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" placeholder="Address" name="address" id="address">
+                                <label for="purpose_requests">Purpose of Request</label>
+                                <input type="text" class="form-control" placeholder="Purpose of Requests"
+                                    name="purpose_requests" id="purpose_requests">
                             </div>
                         </div>
                         <div class="form-row">
@@ -178,6 +165,45 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <script>
+        document.querySelector("#document-selection").addEventListener("change", function (e) {
+            let value = e.srcElement.value;
+
+            let documents = {
+                "certresidency": `<div class="form-row"><div class="form-group col-sm-10"> <label for="full_name">Full Name</label> <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name"> </div> </div>`,
+                "certvalidid": `<div class="form-row"><div class="form-group col-sm-10"> <label for="full_name">Full Name</label> <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name"> </div> </div>`,
+                "certguardianship": `<div class="form-row"> <div class="form-group col-sm-10"> <label for="guardian_name">Guardian Name</label> <input type="text" class="form-control" name="guardian_name" id="guardian_name" placeholder="Guardian Name"> </div></div><div class="form-row"> <div class="form-group col-sm-10"> <label for="full_name">Full Name</label> <input type="text" class="form-control" name="full_name" id="guardian_name" placeholder="Full Name"> </div></div>`,
+                "brgclearance": `<div class="form-row">
+                    <div class="form-group col-sm-1"><label for="suffix">Suffix</label><select class="form-control"
+                            name="suffix" id="suffix">
+                            <option value="mr">Mr.</option>
+                            <option value="ms">Ms.</option>
+                            <option value="mrs">Mrs.</option>
+                        </select> </div>
+                    <div class="form-group col-sm-10"> <label for="full_name">Full Name</label> <input type="text"
+                            class="form-control" name="full_name" id="full_name" placeholder="Full Name"> </div>
+                    <div class="form-group col-sm-1"> <label for="civil_status">Civil Status</label> <select
+                            name="civil_status" class="form-control" id="civil_status">
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                        </select> </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-sm-6"> <label for="age">Age</label> <input type="number"
+                            class="form-control" placeholder="Age" name="age" id="age"> </div>
+                    <div class="form-group col-sm-6"> <label for="residence-number">Residence Number</label> <input
+                            type="number" class="form-control" placeholder="Residence Number" name="residence-number"
+                            id="residence-number"> </div>
+                </div>`,
+                "brgclearance_businesspermit": `<div class="form-row"> <div class="form-group col-sm-12"> <label for="full_name">Full Name</label> <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name"> </div><div class="form-group col-sm-12"> <label for="contact_no">Contact No.</label> <input type="text" class="form-control" name="contact_no" id="contact_no" placeholder="Contact No."> </div><div class="form-group col-sm-12"> <label for="business_type">Type of Business</label> <input type="text" class="form-control" name="business_type" id="business_type" placeholder="Business Type"> </div><div class="form-group col-sm-12"> <label for="business_location">Business Location</label> <input type="text" class="form-control" name="business_location" id="business_location" placeholder="Business Location"> </div><div class="form-group col-sm-12"> <div class="custom-file"> <input type="file" name="business_location_sketch" class="custom-file-input" id="business_location_sketch"> <label class="custom-file-label" for="business_location_sketch">Attach Sketch Map</label> </div></div><div class="form-group col-sm-12"> <div class="form-group" data-id="business_ownership"> <label for="business_ownership">Business Ownership</label> <select class="form-control" id="business_ownership" name="business_ownership"> <option value="rented">Rented</option> <option value="owned">Owned</option> <option value="others">Others Specify</option> </select> </div><div class="form-group" data-id="business_ownership_other"> <label for="business_ownership_other">Business Ownership Other (optional if RENTED or OWNED):</label> <input type="text" class="form-control" name="business_ownership_other" id="business_ownership_other"> </div></div></div><div class="form-row"> <div class="form-group col-sm-6"> <label for="age">Comm Tax Cert. No. (Cedula)</label> <input type="number" class="form-control" placeholder="Age" name="age" id="age"> </div><div class="form-group col-sm-6"> <label for="residence-number">Residence Number</label> <input type="number" class="form-control" placeholder="Residence Number" name="residence-number" id="residence-number"> </div></div>`,
+                "brgclearance_installation": `<div class="form-row"><div class="form-group col-sm-10"> <label for="full_name">Full Name</label> <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name"> </div> </div>`
+            };
+
+            document.querySelector("*[data-id='document-data']").innerHTML = documents[value];
+        });
+
     </script>
 </body>
 
