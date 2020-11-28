@@ -209,4 +209,30 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message',"The user has been added to deceased records.");
     }
+
+    public function notif(Request $request)
+    {
+        $rules = [
+            'title' => ['required','max:200'],
+            'type' => 'required'
+        ];
+
+        $message = [
+            'required' => "This field is required.",
+            'max' => 'Please make title short than 200 characters'
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$message);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $validated = array_merge($validator->validated(),[
+            'status'=>1
+        ]);
+
+        auth()->user()->notif()->create($validated);
+
+        return redirect()->back()->with('message','Notification has been pushed to the whole application');
+    }
 }

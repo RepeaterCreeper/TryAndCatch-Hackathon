@@ -67,7 +67,7 @@
                 <div class="card-body">
                     <div class="d-flex my-2">
                         <h1>Power Outage Reports</h1>
-                        <button class="btn btn-success ml-auto">Push Notification</button>
+                        <button class="btn btn-success ml-auto" data-toggle="modal" data-target="#pushModal">Push Notification</button>
                     </div>
                     <table class="table table-bordered">
                         <thead class="thead-dark">
@@ -91,7 +91,6 @@
                                 <td colspan="4">There are no records to display</td>
                             </tr>
                         @endforelse
-
                         </tbody>
                     </table>
                 </div>
@@ -115,6 +114,37 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="resetLabel()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="pushModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Push Notification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('admin.push.notif')}}" method="post">
+                        @csrf
+                        <input type="text" class="form-control" name="title" placeholder="What's the message?">
+                        <div class="input-group my-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text bg-dark text-white" for="inputGroupSelect01">Color</label>
+                            </div>
+                            <select name="type" class="custom-select" id="inputGroupSelect01">
+                                <option value="red" selected>Red</option>
+                                <option value="green">Green</option>
+                                <option value="yellow">Yellow</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Push</button>
+                    </form>
                 </div>
             </div>
         </div>
