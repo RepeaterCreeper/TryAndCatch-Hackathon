@@ -160,6 +160,12 @@
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <label for="purpose_requests">Purpose of Request</label>
+                                <input type="text" class="form-control" placeholder="Purpose of Requests" name="purpose_requests" id="purpose_requests">
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <button class="btn btn-success" type="submit">Submit Request</button>
                         </div>
                     </form>
