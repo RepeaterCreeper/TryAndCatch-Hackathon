@@ -112,20 +112,15 @@
         </nav>
 
         @foreach($notifs as $notif)
-            <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+            <div class="alert alert-{{$notif->type=='red'?'danger':''}}{{$notif->type=='yellow'?'warning':''}}{{$notif->type=='green'?'success':''}} my-2 alert-dismissible fade show" role="alert">
                 {{$notif->title}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    @auth
-                        @if (auth()->user()->roles_id == 1)
-                            <form action="">
-
-                            </form>
-                            <span aria-hidden="true">&times;</span>
-                        @endif
-                    @else
+                <form action="{{route('admin.notif.delete',$notif->id)}}" method="post">
+                    @method('delete')
+                    @csrf
+                    <button type="submit" class="close" >
                         <span aria-hidden="true">&times;</span>
-                    @endauth
-                </button>
+                    </button>
+                </form>
             </div>
         @endforeach
         <main class="py-4">

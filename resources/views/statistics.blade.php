@@ -2,32 +2,55 @@
 @section('content')
     @include('flash.message')
     <div class="row no-gutters">
-        <div class="col-sm-12">
-            <div class="alert alert-danger m-2">
-                <p style="margin: 0;"><b>Barangay Daan Pare</b> is currently experiencing power outage.</p>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2 bg-danger">
+        <div class="col-sm-3">
+            <div class="card shadow m-2 bg-warning">
                 <div class="card-body">
-                    <h4 class="text-white">NEW COVID CASES</h4>
-                    <h1 style="font-weight: bold; color: white;">+5</h1>
+                    <div style="display: flex; align-items: center;">
+                        <h4 class="text-dark" style="flex: 1;">ACTIVE CASES</h4>
+                    </div>
+                    <h1 class="text-dark" style="font-weight: bold;">{{$active != 0 ? '+'.$active:'none'}}</h1>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+            <div class="card shadow m-2 bg-danger">
+                <div class="card-body">
+                    <div style="display: flex; align-items: center;">
+                        <h4 class="text-white" style="flex: 1;">NEW COVID CASES</h4>
+                    </div>
+                    <h1 style="font-weight: bold; color: white;">{{$count != 0 ? '+'.$count:'none'}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card shadow m-2 bg-success">
+                <div class="card-body">
+                    <h4 class="text-white">RECOVERED COVID CASES</h4>
+                    <h1 style="font-weight: bold; color: white;">{{$recover != 0 ? '+'.$recover:'none'}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
             <div class="card shadow m-2 bg-dark">
                 <div class="card-body">
                     <h4 class="text-white">TOTAL COVID CASES</h4>
-                    <h1 style="font-weight: bold; color: white;">10</h1>
+                    <h1 style="font-weight: bold; color: white;">{{$total}}</h1>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="card shadow m-2 bg-primary">
                 <div class="card-body">
                     <h4 class="text-white">REGISTERED POPULATION</h4>
-                    <h1 style="font-weight: bold; color: white;">35</h1>
+                    <h1 style="font-weight: bold; color: white;">{{$population == 0 ? 'none': $population}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card shadow m-2 bg-dark">
+                <div class="card-body">
+                    <h4 class="text-white">Total Deaths</h4>
+                    <h1 style="font-weight: bold; color: white;">{{$death == 0 ? 'none': $death}}</h1>
                 </div>
             </div>
         </div>

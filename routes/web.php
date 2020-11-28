@@ -42,6 +42,7 @@ Route::patch('/post/user/approve', [App\Http\Controllers\AdminController::class,
 Route::put('/post/star', [App\Http\Controllers\AdminController::class, 'star'])->name('admin.post.star');
 Route::put('/post/star/remove', [App\Http\Controllers\AdminController::class, 'remove'])->name('post.star.remove');
 Route::post('/push/notif', [App\Http\Controllers\AdminController::class, 'notif'])->name('admin.push.notif');
+Route::delete('/push/delete/{notif}', [App\Http\Controllers\AdminController::class, 'deleteNotif'])->name('admin.notif.delete');
 
 //Covid Case
 Route::post('/post/covid/new', [App\Http\Controllers\AdminController::class, 'covidNew'])->name('covid.new');
