@@ -28,6 +28,7 @@ Route::get('/announcement', [App\Http\Controllers\SiteController::class, 'announ
 Route::get('/statistics', [App\Http\Controllers\SiteController::class, 'statistics'])->name('site.statistics');
 
 Route::get('/dashboard-admin', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/dashboard-approval', [App\Http\Controllers\AdminController::class, 'approval'])->name('admin.approval');
 Route::get('/announcement-admin', [App\Http\Controllers\AdminController::class, 'announcement'])->name('admin.announcement');
 Route::get('/statistics-admin', [App\Http\Controllers\AdminController::class, 'statistics'])->name('admin.statistics');
 Route::get('/request/{email}', [App\Http\Controllers\AdminController::class, 'image'])->name('admin.view.image');
@@ -36,9 +37,13 @@ Route::delete('/request/{user}', [App\Http\Controllers\AdminController::class, '
 Route::post('/post/admin/store', [App\Http\Controllers\AdminController::class, 'post'])->name('admin.post.store');
 Route::patch('/post/admin/update', [App\Http\Controllers\AdminController::class, 'update'])->name('admin.post.update');
 Route::delete('/post/admin/delete', [App\Http\Controllers\AdminController::class, 'delete'])->name('admin.post.delete');
+Route::patch('/post/user/deny', [App\Http\Controllers\AdminController::class, 'deny'])->name('admin.post.deny');
+Route::patch('/post/user/approve', [App\Http\Controllers\AdminController::class, 'approve'])->name('admin.post.approve');
 
 Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard');
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');
+Route::get('/user/post/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.post.store');
+Route::patch('/user/post/cancel', [App\Http\Controllers\UserController::class, 'cancel'])->name('user.post.cancel');
 
 Route::get('/appointment-user', function() {
     return view('appointment-user');
