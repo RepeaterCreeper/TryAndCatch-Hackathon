@@ -33,6 +33,7 @@ Route::get('/statistics-admin', [App\Http\Controllers\AdminController::class, 's
 Route::get('/request/{email}', [App\Http\Controllers\AdminController::class, 'image'])->name('admin.view.image');
 Route::patch('/request/{user}', [App\Http\Controllers\AdminController::class, 'add'])->name('admin.add');
 Route::delete('/request/{user}', [App\Http\Controllers\AdminController::class, 'reject'])->name('admin.reject');
+Route::post('/post/store', [App\Http\Controllers\AdminController::class, 'post'])->name('admin.post.store');
 
 Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard');
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');

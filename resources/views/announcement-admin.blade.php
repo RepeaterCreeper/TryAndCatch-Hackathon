@@ -100,30 +100,51 @@
             <h1 class="m-4">Announcement</h1>
         </div>
         <div class="col-sm-6 my-2">
-            <div class="mx-4">
-                <textarea class="form-control"></textarea>
+            <form class="mx-4" action="{{route('admin.post.store')}}" method="post" enctype="multipart/form-data">
+                @include('flash.message')
+                @csrf
+                <div class="custom-file mb-2">
+                    <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror" id="customFile">
+                    <label class="custom-file-label" for="customFile">Attach an image</label>
+                </div>
+                <textarea class="form-control  @error('caption') is-invalid @enderror" name="caption" placeholder="What's your message?"></textarea>
+                @error('caption')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 <button class="btn btn-primary mt-2 mb-4"><i class="fas fa-edit"></i> Post Announcement</button>
-            </div>
-            <div class="card mx-4 p-4 shadow bg-dark text-white">
-                <div class="card-content" style="display: flex; flex-direction: column; gap: 16px;">
-                    <div style="display: flex; gap: 16px;">
-                        <div class="rounded-circle" style="width: 64px; height: 64px; background-color: red; display: flex; justify-content: center; align-items: center;">
-                            <h3 style="margin: 0;">J</h3>
+            </form>
+            @forelse ($posts as $post)
+                <div class="card mx-4 p-4 mt-2 shadow bg-dark text-white">
+                    <div class="card-content" style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; gap: 16px;">
+                            <div class="rounded-circle" style="width: 64px; height: 64px; background-color: red; display: flex; justify-content: center; align-items: center;">
+                                <h3 style="margin: 0;">J</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+                                <h3 style="margin: 0;">{{ucfirst($post->user->first_name)." ". ucfirst($post->user->last_name)}} <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">Mayor</span></h3>
+                                <small>{{$post->created_at->diffForHumans()}}</small>
+                            </div>
+                            <div style="display: flex; justify-content: center; gap: 8px; align-items: center;">
+                                <button class="btn btn-warning" style="height: fit-content;"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-danger" style="height: fit-content;"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
-                        <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
-                            <h3 style="margin: 0;">Joseph Chua <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">Mayor</span></h3>
-                            <small>2 minutes ago</small>
+                        <div>
+                            @if ($post->image)
+                                <img src="{{asset('storage/images/posts/'.$post->user->id.'/'.$post->image)}}" class="img-fluid my-4 w-50" alt="image">
+                            @endif
+                            <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
                         </div>
-                        <div style="display: flex; justify-content: center; gap: 8px; align-items: center;">
-                            <button class="btn btn-warning" style="height: fit-content;"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-danger" style="height: fit-content;"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div>
-                        <p style="margin: 0;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum repellendus amet optio at, soluta, quis earum non quos vitae a iusto quam neque, doloribus adipisci! Eligendi iusto veritatis ratione accusantium?</p>
                     </div>
                 </div>
-            </div>
+            @empty
+                    <div class="text-center">
+                        <h1>You have'nt made any post yet</h1>
+                    </div>
+            @endforelse
+
         </div>
     </div>
     <!-- Optional JavaScript -->
@@ -139,6 +160,12 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 </body>
 
 </html>

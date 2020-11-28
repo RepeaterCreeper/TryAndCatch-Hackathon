@@ -2,25 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
     }
 
     public function dashboard()
     {
         $users = User::where(['status'=>false])->get();
-        if(auth()->user()->roles_id == 1)
-            return view('dashboard-admin',compact('users'));
-        else
-            \Auth::logout();
-        return redirect()->back();
+        return view('dashboard-admin',compact('users'));
+    }
+
+    public function post(Request $request)
+    {
+        $rules = [
+            'caption' => ['required'],
+            'image' => 'image'
+        ];
+        $message = [
+            'caption.required' => "You don't have any message to post."
+        ];
+        $validator = Validator::make($request->all(),$rules,$message);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+
+        if($request->image){
+            $fileName = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('images/posts',auth()->id()."/".$fileName,'public');
+        }
+
+        auth()->user()->posts()->create([
+            'caption' => $validator->validated()['caption'],
+            'image' => $fileName ?? null,
+            'roles_id'=> auth()->user()->roles_id
+        ]);
+
+        return redirect()->back()->with('message',"Your post has been published to the community");
+
     }
 
     public function image($email)
@@ -31,7 +59,8 @@ class AdminController extends Controller
 
     public function announcement()
     {
-        return $this->show('announcement-admin');
+        $posts = Post::where(['roles_id'=>auth()->user()->roles_id])->orderBy('created_at','desc')->get();
+        return view('announcement-admin',compact('posts'));
     }
 
     public function add(User $user)
@@ -45,15 +74,6 @@ class AdminController extends Controller
         //Maybe just store them in a separate database? before deletion, to keep the records..
         $user->delete();
         return redirect()->route('admin.dashboard')->with('message',"User has been deleted successfully!");
-    }
-
-    private function show(string $view)
-    {
-        if(auth()->user()->roles_id == 1)
-            return view($view);
-        else
-            \Auth::logout();
-        return redirect()->back();
     }
 
     public function statistics()

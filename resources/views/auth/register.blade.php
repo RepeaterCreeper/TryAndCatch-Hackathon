@@ -16,13 +16,14 @@
 {{--                                    <input type="file" name="valid_id" class="custom-file-input @error('valid_id') is-invalid @enderror" id="customFile">--}}
                                     <input type="file" name="valid_id" class="custom-file-input @error('valid_id') is-invalid @enderror" id="customFile">
                                     <label class="custom-file-label" for="customFile">Choose file</label>
+
                                 </div>
+                                @error('valid_id')
+                                    <span class="text-danger" role="alert">
+                                        <strong class="font-weight-bold">{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-{{--                            @error('valid_id')--}}
-{{--                            <span class="invalid-feedback" role="alert">--}}
-{{--                                    <strong>{{ $message }}</strong>--}}
-{{--                                </span>--}}
-{{--                            @enderror--}}
                         </div>
                         <hr>
                         <div class="form-group row">

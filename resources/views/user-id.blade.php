@@ -7,7 +7,7 @@
             <h4>{{$user->address}}</h4>
         </div>
         <div class="w-75">
-            <img src="{{asset('storage/images/'.$user->email."/".$user->valid_id)}}" alt="" class="img-thumbnail">
+            <img src="{{asset('storage/images/id/'.$user->email."/".$user->valid_id)}}" alt="" class="img-thumbnail">
         </div>
         <div class="actions mt-2 w-75 d-flex justify-content-end">
             <form action="{{route('admin.add',$user->id)}}" method="post">

@@ -78,7 +78,7 @@ class RegisterController extends Controller
     {
          $user = User::create([
             'first_name' => $data['first_name'],
-            'roles_id' => 1,
+            'roles_id' => 2,
             'status' => false,
             'tag_id' => 1,
             'middle_name' => $data['middle_name'] ?? "",
@@ -93,7 +93,7 @@ class RegisterController extends Controller
 
         if(request()->hasFile('valid_id')){
             $fileName = request()->file('valid_id')->getClientOriginalName();
-            request()->file('valid_id')->storeAs('images',$user->email."/".$fileName,'public');
+            request()->file('valid_id')->storeAs('images/id',$user->email."/".$fileName,'public');
             $user->update(['valid_id'=>$fileName]);
         }
         return $user;
