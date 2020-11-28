@@ -111,7 +111,7 @@
                 <p style="margin: 0;"><b>Barangay Daan Pare</b> is currently experiencing power outage.</p>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="card shadow m-2 bg-danger">
                 <div class="card-body">
                     <div style="display: flex; align-items: center;">
@@ -122,15 +122,23 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2 bg-dark">
+        <div class="col-sm-3">
+            <div class="card shadow m-2 bg-success">
                 <div class="card-body">
-                    <h4 class="text-white">TOTAL COVID CASES</h4>
-                    <h1 style="font-weight: bold; color: white;">10</h1>
+                    <h4 class="text-white">RECOVERED COVID CASES</h4>
+                    <h1 style="font-weight: bold; color: white;">+3</h1>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+            <div class="card shadow m-2 bg-dark">
+                <div class="card-body">
+                    <h4 class="text-white">TOTAL COVID CASES</h4>
+                    <h1 style="font-weight: bold; color: white;">7</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
             <div class="card shadow m-2 bg-primary">
                 <div class="card-body">
                     <h4 class="text-white">REGISTERED POPULATION</h4>
