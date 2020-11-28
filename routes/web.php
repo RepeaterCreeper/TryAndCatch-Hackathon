@@ -44,3 +44,15 @@ Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dash
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');
 Route::get('/user/post/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.post.store');
 Route::patch('/user/post/cancel', [App\Http\Controllers\UserController::class, 'cancel'])->name('user.post.cancel');
+
+Route::get('/appointment-user', function() {
+    return view('appointment-user');
+});
+
+Route::get('/document-user', function() {
+    return view('document-user');
+});
+
+Route::get('/support-user', function() {
+    return view('support-user');
+});

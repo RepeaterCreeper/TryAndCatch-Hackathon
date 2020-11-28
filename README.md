@@ -16,6 +16,9 @@ If encountered with error Run: `npm install --save-dev cross-env`
 
 Then Run: `npm install && npm run dev` again
 
+4. Run `php artisan storage:link`
+
+5. `php artisan serve`
 
 You're good to go!
 
