@@ -37,10 +37,10 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item {{Request::is('announcements') ? 'active' : ''}}">
+                    <li class="nav-item {{Request::is('announcement') ? 'active' : ''}}">
                         <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Public)</a>
                     </li>
-                    <li class="nav-item {{Request::is('dashboard-user') ? 'active' : ''}}">
+                    <li class="nav-item {{Request::is('posts-user') ? 'active' : ''}}">
                         <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
                     </li>
                     <li class="nav-item  {{Request::is('statistics') ? 'active' : ''}}">
@@ -48,8 +48,8 @@
                     </li>
                     @auth
                         @if (auth()->user()->roles_id === 2)
-                            <li class="nav-item  {{Request::is('statistics') ? 'active' : ''}}">
-                                <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Post Approval (User)</a>
+                            <li class="nav-item  {{Request::is('dashboard-user') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i> Post Approval (User)</a>
                             </li>
                         @endif
                     @endauth
@@ -115,6 +115,7 @@
         </main>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();

@@ -4,7 +4,7 @@
         <div class="col-sm-12">
             <div class="jumbotron">
                 <h1 class="display-4">Welcome back, {{auth()->user()->first_name}}</h1>
-                <p class="lead">There are no new updates since you were last online.</p>
+                <p class="lead">We are happy that you're here!</p>
             </div>
         </div>
         <div class="col-sm-12 p-2">
@@ -29,12 +29,16 @@
                         <td style="max-width: 256px;">{{$post->caption}}</td>
                         <td>{{$post->created_at}}</td>
                         <td>
-                            <form action="{{route('user.post.cancel')}}" method="post">
-                                @method('patch')
-                                @csrf
-                                <input type="hidden" value="{{$post->id}}" name="id">
-                                <button class="btn btn-danger">Cancel</button>
-                            </form>
+                          @if ($post->status)
+                                <form action="{{route('user.post.cancel')}}" method="post">
+                                    @method('patch')
+                                    @csrf
+                                    <input type="hidden" value="{{$post->id}}" name="id">
+                                    <button class="btn btn-danger">Cancel</button>
+                                </form>
+                            @else
+                                <span class="text-danger">Rejected</span>
+                            @endif
                         </td>
                     </tr>
                 @empty

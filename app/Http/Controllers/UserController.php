@@ -19,7 +19,7 @@ class UserController extends Controller
         if(auth()->user()->roles_id == 1) abort(404);
 
         if(auth()->user()->status == true){
-            $posts = auth()->user()->posts()->where(['published'=>0,'status'=>1])->get();
+            $posts = auth()->user()->posts()->where(['published'=>0])->get()->sortByDesc('status');
             return view('dashboard-user',compact('posts'));
         }
         else{
