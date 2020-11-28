@@ -51,32 +51,5 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Need an appointment?</h3>
-                    <p>Schedule one today.</p>
-                    <button class="btn btn-primary">Schedule an Appointment</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Get Documents</h3>
-                    <p>Do you require a document? View all documents that you can request.</p>
-                    <button class="btn btn-primary">View Documents</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Admin Support</h3>
-                    <p>Having problems? Need to chat with the admin?</p>
-                    <button class="btn btn-primary">Chat with Admin</button>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection

@@ -34,6 +34,22 @@
                             </div>
                             <div style="display: flex; justify-content: center; gap: 8px; align-items: center;">
                                 <div class="postTools" id="postTools-{{$post->id}}">
+                                    @if ($post->important)
+                                        <form action="{{route('post.star.remove')}}" method="post" class="d-inline">
+                                            @method('put')
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$post->id}}">
+                                            <button class="btn btn-danger" style="height: fit-content;"><i class="fas fa-star"></i> unpinned</button>
+                                        </form>
+                                    @else
+                                        <form action="{{route('admin.post.star')}}" method="post" class="d-inline">
+                                            @method('put')
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$post->id}}">
+                                            <button class="btn btn-success" style="height: fit-content;"><i class="fas fa-star"></i></button>
+                                        </form>
+                                    @endif
+
                                     <button class="btn btn-warning" onclick="editInvoke('{{$post->caption}}','{{$post->id}}')" style="height: fit-content;"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-danger" onclick="onDelete({{$post->id}})" style="height: fit-content;"><i class="fas fa-trash"></i></button>
                                 </div>
@@ -143,7 +159,6 @@
                     }
                 })
             }
-
         </script>
 
         <script>

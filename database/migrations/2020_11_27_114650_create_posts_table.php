@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->foreign('roles_id')->references('id')->on('roles');
             $table->text('image')->nullable();
             $table->boolean('status');
+            $table->boolean('important');
             $table->boolean('published');
             $table->timestamps();
         });

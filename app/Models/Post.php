@@ -14,6 +14,7 @@ class Post extends Model
         'image',
         'roles_id',
         'status',
+        'important',
         'published'
     ];
 

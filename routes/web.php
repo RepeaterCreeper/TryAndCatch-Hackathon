@@ -39,6 +39,15 @@ Route::patch('/post/admin/update', [App\Http\Controllers\AdminController::class,
 Route::delete('/post/admin/delete', [App\Http\Controllers\AdminController::class, 'delete'])->name('admin.post.delete');
 Route::patch('/post/user/deny', [App\Http\Controllers\AdminController::class, 'deny'])->name('admin.post.deny');
 Route::patch('/post/user/approve', [App\Http\Controllers\AdminController::class, 'approve'])->name('admin.post.approve');
+Route::put('/post/star', [App\Http\Controllers\AdminController::class, 'star'])->name('admin.post.star');
+Route::put('/post/star/remove', [App\Http\Controllers\AdminController::class, 'remove'])->name('post.star.remove');
+
+//Covid Case
+Route::post('/post/covid/new', [App\Http\Controllers\AdminController::class, 'covidNew'])->name('covid.new');
+Route::get('/show/case', [App\Http\Controllers\AdminController::class, 'addNewCaseView'])->name('covid.add.view');
+Route::get('/show/update/case', [App\Http\Controllers\AdminController::class, 'updateCaseView'])->name('covid.update.view');
+Route::patch('/update/case/recover', [App\Http\Controllers\AdminController::class, 'recover'])->name('covid.update.recover');
+Route::patch('/update/case/deceased', [App\Http\Controllers\AdminController::class, 'deceased'])->name('covid.update.deceased');
 
 Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard');
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');

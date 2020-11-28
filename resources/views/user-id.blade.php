@@ -9,7 +9,9 @@
         <div class="w-75">
             <img src="{{asset('storage/images/id/'.$user->email."/".$user->valid_id)}}" alt="" class="img-thumbnail">
         </div>
-        <div class="actions mt-2 w-75 d-flex justify-content-end">
+
+        <div class="actions mt-2 w-75 d-flex">
+            <a href="{{route('admin.dashboard')}}" class="btn btn-outline-dark mr-auto">Back</a>
             <form action="{{route('admin.add',$user->id)}}" method="post">
                 @method('patch')
                 @csrf

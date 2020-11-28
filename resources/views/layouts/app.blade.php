@@ -40,13 +40,14 @@
                     <li class="nav-item {{Request::is('announcement') ? 'active' : ''}}">
                         <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Public)</a>
                     </li>
-                    <li class="nav-item {{Request::is('posts-user') ? 'active' : ''}}">
-                        <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
-                    </li>
+
                     <li class="nav-item  {{Request::is('statistics') ? 'active' : ''}}">
                         <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Public)</a>
                     </li>
                     @auth
+                        <li class="nav-item {{Request::is('posts-user') ? 'active' : ''}}">
+                            <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
+                        </li>
                         @if (auth()->user()->roles_id === 2)
                             <li class="nav-item  {{Request::is('dashboard-user') ? 'active' : ''}}">
                                 <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-chart-bar"></i> Post Approval (User)</a>

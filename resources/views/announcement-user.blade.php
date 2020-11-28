@@ -49,7 +49,7 @@
                 @endif
             @endauth
         </div>
-        @foreach ($posts as $post)
+        @forelse ($posts as $post)
             <div class="col-sm-6 my-2">
                 <div class="card mx-4 p-4 shadow border-primary">
                     <div class="card-content" style="display: flex; flex-direction: column; gap: 16px;">
@@ -68,5 +68,7 @@
                     </div>
                 </div>
             </div>
-    @endforeach
+    @empty
+        <h2 class="text-center w-100 text-primary font-weight-bold mt-5">There are no post yet.</h2>
+    @endforelse
 @endsection

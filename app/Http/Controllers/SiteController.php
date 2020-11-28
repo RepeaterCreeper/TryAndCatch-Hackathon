@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -34,7 +35,8 @@ class SiteController extends Controller
 
     public function announcement()
     {
-        return view('announcement-public');
+        $posts = Post::where(['roles_id'=>1,'status'=>true])->get();
+        return view('announcement-public',compact('posts'));
     }
 
     public function statistics()

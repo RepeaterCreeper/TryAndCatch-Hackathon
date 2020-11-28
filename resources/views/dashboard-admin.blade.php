@@ -25,49 +25,36 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($users as $user)
+                @forelse ($users as $user)
                     <tr>
                         <th scope="row">{{$user->id}}</th>
                         <td>{{$user->first_name}}</td>
                         <td>{{$user->last_name}}</td>
                         <td>{{$user->address}}</td>
                         <td><a href="{{route('admin.view.image',$user->email)}}">View ID</a></td>
-                        <td>
-                            <button class="btn btn-danger"><i class="fas fa-ban"></i> Reject</button>
-                            <button class="btn btn-success"><i class="fas fa-check"></i> Approve</button>
+                        <td class="d-flex">
+                            <form action="{{route('admin.add',$user->id)}}" method="post">
+                                @method('patch')
+                                @csrf
+                                <input type="text" hidden value="{{$user->id}}">
+                                <button class="btn btn-success ml-2"><i class="fas fa-check"></i> Approve</button>
+                            </form>
+
+                            <form action="{{route('admin.reject',$user->id)}}" method="post">
+                                @method('delete')
+                                @csrf
+                                <button class="btn btn-danger ml-2"><i class="fas fa-ban"></i> Reject</button>
+                            </form>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center bg-primary text-white-50"><h3>No records</h3></td>
+                    </tr>
+                @endforelse
 
                 </tbody>
             </table>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Need an appointment?</h3>
-                    <p>Schedule one today.</p>
-                    <button class="btn btn-primary">Schedule an Appointment</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Get Documents</h3>
-                    <p>Do you require a document? View all documents that you can request.</p>
-                    <button class="btn btn-primary">View Documents</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card shadow m-2">
-                <div class="card-body">
-                    <h3 style="margin-bottom: 0; font-weight: bolder;">Admin Support</h3>
-                    <p>Having problems? Need to chat with the admin?</p>
-                    <button class="btn btn-primary">Chat with Admin</button>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
