@@ -111,7 +111,23 @@
             </div>
         </nav>
 
-        {{$notifs}}
+        @foreach($notifs as $notif)
+            <div class="alert alert-danger my-2 alert-dismissible fade show" role="alert">
+                {{$notif->title}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    @auth
+                        @if (auth()->user()->roles_id == 1)
+                            <form action="">
+
+                            </form>
+                            <span aria-hidden="true">&times;</span>
+                        @endif
+                    @else
+                        <span aria-hidden="true">&times;</span>
+                    @endauth
+                </button>
+            </div>
+        @endforeach
         <main class="py-4">
             @yield('content')
         </main>
