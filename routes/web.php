@@ -39,3 +39,15 @@ Route::delete('/post/admin/delete', [App\Http\Controllers\AdminController::class
 
 Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard');
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');
+
+Route::get('/appointment-user', function() {
+    return view('appointment-user');
+});
+
+Route::get('/document-user', function() {
+    return view('document-user');
+});
+
+Route::get('/support-user', function() {
+    return view('support-user');
+});
