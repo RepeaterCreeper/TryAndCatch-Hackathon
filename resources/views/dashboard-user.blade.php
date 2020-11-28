@@ -13,6 +13,16 @@
                 <small>These are all your posts that are <b>PENDING</b> approval</small>
             </div>
             @include('flash.message')
+            @auth
+                @if (auth()->user()->roles_id==2)
+                    <div class="row no-gutters d-flex justify-content-end my-2">
+                        <form action="{{route('user.report')}}" method="post">
+                            @csrf
+                            <button class="btn btn-danger ml-2">Report Power Outage</button>
+                        </form>
+                    </div>
+                @endif
+            @endauth
             <table class="table">
                 <thead class="thead-dark">
                 <tr>

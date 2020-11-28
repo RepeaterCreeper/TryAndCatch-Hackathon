@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CovidCase;
 use App\Models\Post;
+use App\Models\Report;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -92,7 +93,6 @@ class AdminController extends Controller
             $fileName = $request->file('image')->getClientOriginalName();
             $request->file('image')->storeAs('images/posts',auth()->id()."/".$fileName,'public');
         }
-
         auth()->user()->posts()->create([
             'caption' => $validator->validated()['caption'],
             'image' => $fileName ?? null,
@@ -133,7 +133,7 @@ class AdminController extends Controller
 
     public function statistics()
     {
-        $actives = CovidCase::where('status','!=','recovered')->where('status','!=',1)->get();
+        $actives = CovidCase::where(['status'=>'infected'])->get();
 //        dd($actives);
         $count = 0;
         foreach ($actives as $active) {
@@ -142,14 +142,18 @@ class AdminController extends Controller
         }
         $active = $actives->count();
         $recover = CovidCase::where(['status'=>'recovered'])->count();
+        $deaths = CovidCase::where(['status'=>'deceased'])->count();
         $total = CovidCase::all()->count();
-        $population = User::all()->count();
+        $population = User::where(['status'=>true])->get()->count();
+        $reports = Report::where(['calamities_id'=>1])->get();
         return view('statistics-admin',[
             'active'=>$active,
             'count'=>$count,
             'recover'=>$recover,
             'total'=>$total,
+            'death'=>$deaths,
             'population'=>$population,
+            'reports'=>$reports,
         ]);
     }
 
@@ -187,7 +191,7 @@ class AdminController extends Controller
 
     public function updateCaseView()
     {
-        $cases = CovidCase::where("status",'!=','recovered')->where("status","!=",1)->get();
+        $cases = CovidCase::where(['status'=>'infected'])->get();
         return view('admin-updatecase',compact('cases'));
     }
 
@@ -202,6 +206,7 @@ class AdminController extends Controller
     {
         $case = CovidCase::find($request->id);
         $case->update(['status'=>'deceased']);
+
         return redirect()->back()->with('message',"The user has been added to deceased records.");
     }
 }

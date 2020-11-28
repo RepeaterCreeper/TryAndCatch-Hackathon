@@ -27,10 +27,11 @@ class SiteController extends Controller
             return redirect()->route("site.statistics")->with('error','Your account is not yet validated.');
         }
 
-        if(auth()->user()->roles_id == 1)
-            return redirect()->route('admin.dashboard');
         if(auth()->user()->roles_id == 2)
             return redirect()->route('user.dashboard');
+
+        if(auth()->user()->roles_id == 1)
+            return redirect()->route('admin.dashboard');
     }
 
     public function announcement()

@@ -32,9 +32,5 @@
             </div>
         </div>
     </div>
-    <div class="row no-gutters">
-        <div class="col-sm-6">
-            <button class="btn btn-danger">Report Power Outage</button>
-        </div>
-    </div>
+
 @endsection

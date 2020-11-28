@@ -29,7 +29,7 @@
                                 <h3 style="margin: 0;">J</h3>
                             </div>
                             <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
-                                <h3 style="margin: 0;">{{ucfirst($post->user->first_name)." ". ucfirst($post->user->last_name)}} <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">Mayor</span></h3>
+                                <h3 style="margin: 0;">{{ucfirst($post->user->first_name)." ". ucfirst($post->user->last_name)}} <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">{{$post->user->tag->name}}</span></h3>
                                 <small>{{$post->created_at->diffForHumans()}}</small>
                             </div>
                             <div style="display: flex; justify-content: center; gap: 8px; align-items: center;">

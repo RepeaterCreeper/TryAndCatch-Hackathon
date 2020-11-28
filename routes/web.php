@@ -54,6 +54,10 @@ Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])
 Route::get('/user/post/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.post.store');
 Route::patch('/user/post/cancel', [App\Http\Controllers\UserController::class, 'cancel'])->name('user.post.cancel');
 
+//Reports
+Route::post('/user/report', [App\Http\Controllers\UserController::class, 'report'])->name('user.report');
+
+
 Route::get('/appointment-user', function() {
     return view('appointment-user');
 });

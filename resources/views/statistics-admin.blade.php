@@ -52,12 +52,23 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+            <div class="card shadow m-2 bg-dark">
+                <div class="card-body">
+                    <h4 class="text-white">Total Deaths</h4>
+                    <h1 style="font-weight: bold; color: white;">{{$death == 0 ? 'none': $death}}</h1>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row no-gutters">
         <div class="col-sm-6">
             <div class="card shadow m-2 border-primary">
                 <div class="card-body">
-                    <h1>Power Outage Reports</h1>
+                    <div class="d-flex my-2">
+                        <h1>Power Outage Reports</h1>
+                        <button class="btn btn-success ml-auto">Push Notification</button>
+                    </div>
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                         <tr>
@@ -68,12 +79,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">00-0001</th>
-                            <td>Joseph Chua</td>
-                            <td>JavaScript, Void</td>
-                            <td>11/28/2020 08:00:54 am</td>
-                        </tr>
+                        @forelse ($reports as $report)
+                            <tr>
+                                <th scope="row">{{$report->user->id}}</th>
+                                <td>{{$report->user->first_name." ".$report->user->last_name}}</td>
+                                <td>{{$report->user->address}}</td>
+                                <td>{{$report->created_at}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4">There are no records to display</td>
+                            </tr>
+                        @endforelse
+
                         </tbody>
                     </table>
                 </div>
@@ -94,16 +112,6 @@
                 <div class="modal-body">
                     <a class="btn btn-primary" href="{{route('covid.add.view')}}" id="addNewBtn">Add new case</a>
                     <a class="btn btn-outline-primary" href="{{route('covid.update.view')}}" id="updateBtn">Update Recoveries</a>
-                  {{--  <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>--}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="resetLabel()" class="btn btn-secondary" data-dismiss="modal">Close</button>

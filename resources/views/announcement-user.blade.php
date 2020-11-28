@@ -13,7 +13,7 @@
                                 <h3 style="margin: 0;">{{$announcement->user->first_name[0]}}</h3>
                             </div>
                             <div style="display: flex; flex-direction: column; justify-content: center;">
-                                <h3 style="margin: 0;">Joseph Chua <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">{{$announcement->user->tag->name}}</span></h3>
+                                <h3 style="margin: 0;">{{$announcement->user->first_name." ".$announcement->user->last_name}} <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">{{$announcement->user->tag->name}}</span></h3>
                                 <small>{{$announcement->created_at->diffForHumans()}}</small>
                             </div>
                         </div>

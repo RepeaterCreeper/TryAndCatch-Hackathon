@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,8 +65,25 @@ class UserController extends Controller
             'roles_id' => auth()->user()->roles_id,
             'status' => true,
             'published' => false,
+            'important' => false,
         ]);
         auth()->user()->posts()->create($validated);
         return redirect()->back()->with('message','Your post has been submitted for approval.');
+    }
+
+    public function report()
+    {
+        $user = auth()->user()->reports->last();
+        if($user){
+            $dateDiff = date_diff($user->created_at->toDateTime(),Carbon::now()->toDateTime());
+            if($dateDiff->h < 2){
+                return redirect()->back()->with('error','You can only report once per 2 hours');
+            }
+        }
+        //For now power outage onlu
+        auth()->user()->reports()->create([
+            'calamities_id'=>1
+        ]);
+        return redirect()->back()->with('message','Your report has been sent.');
     }
 }
