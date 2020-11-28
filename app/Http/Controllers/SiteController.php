@@ -34,7 +34,7 @@ class SiteController extends Controller
 
     public function announcement()
     {
-        return "wala pa ";
+        return view('announcement-public');
     }
 
     public function statistics()
