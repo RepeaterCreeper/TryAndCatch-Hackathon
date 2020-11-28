@@ -232,21 +232,20 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    let editField = document.getElementById("edit-"+postID)
-                    console.log(editField);
-                    return ;
+                    const editField = document.getElementById("edit-"+postID)
                     const p = document.getElementById('caption-'+postID);
-                    axios.patch('post/admin/update',{id:postID,caption:caption.innerText}).then(response=>{
-                        p.innerText = caption.innerText
-                        const editTools = document.getElementById("editTools-"+id);
-                        editTools.style.display = "none";
+                    axios.patch('post/admin/update',{id:postID,caption:editField.value}).then(response=>{
+                        console.log(document.getElementById('caption-'+postID).innerText)
+                        p.innerText = editField.value
+                        console.log(document.getElementById('caption-'+postID).innerText)
                         Swal.fire(
                             'Updated!',
                             'Your Post has been updated.',
                             'success'
                         ).then(e=>{
-                            // location.reload();
+                            location.reload()
                         })
+
                     });
                 }
             })

@@ -21,6 +21,26 @@ class AdminController extends Controller
         return view('dashboard-admin',compact('users'));
     }
 
+    public function approve(Request $request)
+    {
+        $post = Post::find($request->id);
+        $post->update(['published'=>true]);
+        return redirect()->back()->with('message',"Post has been approved.");
+    }
+
+    public function approval()
+    {
+        $posts = Post::where(['published' => false, 'status' => true ])->get();
+        return view('dashboard-approval',compact('posts'));
+    }
+
+    public function deny(Request $request)
+    {
+        $post = Post::find($request->id);
+        $post->update(['status'=>false]);
+        return redirect()->back()->with('message',"Post has been rejected.");
+    }
+
     public function delete(Request $request)
     {
         $post = Post::find($request->id);
@@ -31,8 +51,6 @@ class AdminController extends Controller
     public function update(Request $request)
     {
         $post = Post::find($request->id);
-        var_dump($request->all());
-        exit;
         $post->update(['caption'=>$request->caption]);
         return response(['message'=>"Post has been updated!"]);
     }
@@ -62,7 +80,8 @@ class AdminController extends Controller
             'caption' => $validator->validated()['caption'],
             'image' => $fileName ?? null,
             'roles_id'=> auth()->user()->roles_id,
-            'status'=>true
+            'status'=>true,
+            'published'=>true,
         ]);
 
         return redirect()->back()->with('message',"Your post has been published to the community");

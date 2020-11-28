@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'roles_id' => 2,
             'status' => false,
-            'tag_id' => 1,
+            'tag_id' => 2,
             'middle_name' => $data['middle_name'] ?? "",
             'last_name' => $data['last_name'],
             'birthdate' => $data['birthdate'],

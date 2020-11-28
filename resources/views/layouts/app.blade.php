@@ -15,7 +15,15 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous" />
+    <style>
+        body {
+            font-family: 'Nunito';
+        }
 
+    </style>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -28,34 +36,40 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item {{Request::is('announcements') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Public)</a>
+                    </li>
+                    <li class="nav-item {{Request::is('dashboard-user') ? 'active' : ''}}">
+                        <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
+                    </li>
+                    <li class="nav-item  {{Request::is('statistics') ? 'active' : ''}}">
                         <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Public)</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Announcements & Posts (Public)</a>
-                    </li>
                     @auth
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{route('site.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-home"></i> Home (User)<span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        @if (auth()->user()->roles_id === 1)
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{route('admin.dashboard')}}"><i class="fas fa-tachometer-alt"></i> Admin Dashboard<span
-                                        class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{route('admin.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Admin)</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('admin.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Admin)</a>
+                        @if (auth()->user()->roles_id === 2)
+                            <li class="nav-item  {{Request::is('statistics') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Post Approval (User)</a>
                             </li>
                         @endif
+                    @endauth
+                    @auth
+                    @if (auth()->user()->roles_id === 1)
+                        <li class="nav-item  {{Request::is('dashboard-approval') ? 'active' : ''}}">
+                            <a class="nav-link" href="{{route('admin.approval')}}"><i class="fas fa-home"></i> Post Approval (Admin)<span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item {{Request::is('dashboard-admin') ? 'active' : ''}}">
+                            <a class="nav-link" href="{{route('admin.dashboard')}}"><i class="fas fa-tachometer-alt"></i> Admin Dashboard<span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item {{Request::is('announcement-admin') ? 'active' : ''}}">
+                            <a class="nav-link" href="{{route('admin.announcement')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (Admin)</a>
+                        </li>
+                        <li class="nav-item {{Request::is('statistics-admin') ? 'active' : ''}}">
+                            <a class="nav-link" href="{{route('admin.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Admin)</a>
+                        </li>
+                    @endif
                     @endauth
                 </ul>
 
@@ -97,11 +111,9 @@
         </nav>
 
         <main class="py-4">
-            @include('flash.message')
             @yield('content')
         </main>
     </div>
-
 
     <script>
         $(".custom-file-input").on("change", function() {
@@ -109,5 +121,13 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+     </script>--}}
+    @stack('scripts')
 </body>
 </html>

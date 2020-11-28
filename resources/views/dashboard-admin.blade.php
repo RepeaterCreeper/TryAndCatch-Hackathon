@@ -40,14 +40,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('user.posts')}}"><i class="fas fa-bullhorn"></i> Announcements & Posts (User)</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{Request::is(route('admin.approval')) ? 'active' : ''}}">
                     <a class="nav-link" href="{{route('site.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Public)</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.dashboard')}}"><i class="fas fa-home"></i> Home (User)<span
+                    <a class="nav-link" href="{{route('admin.approval')}}"><i class="fas fa-home"></i> Post Approval (Admin)<span
                             class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{route('admin.dashboard')}}"><i class="fas fa-tachometer-alt"></i> Admin Dashboard<span
                             class="sr-only">(current)</span></a>
                 </li>
@@ -99,13 +99,13 @@
     <div class="row no-gutters">
         <div class="col-sm-12">
             <div class="jumbotron">
-                <h1 class="display-4">Welcome back, Admin!</h1>
-                <p class="lead">There are <b>2 new users</b> pending approval since you were last online.</p>
+                <h1 class="display-4">Welcome back, {{auth()->user()->first_name}}!</h1>
+                <p class="lead">There are <b>{{$users->count()}} new user/s</b> pending approval since you were last online.</p>
             </div>
         </div>
         <div class="col-sm-12 p-2">
             <div>
-                <h2 style="margin-bottom: 0; display: flex; align-items: center; gap: 16px;">Pending Users <span style="font-size: 12pt;" class="badge badge-success">0</span></h2>
+                <h2 style="margin-bottom: 0; display: flex; align-items: center; gap: 16px;">Pending Users <span style="font-size: 12pt;" class="badge badge-success">{{$users->count()}}</span></h2>
                 <small>These are all the pending users.</small>
             </div>
             <table class="table">

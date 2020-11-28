@@ -1,4 +1,6 @@
 @extends('layouts.app')
+
+
 @section('content')
     <div class="row no-gutters">
         <div class="col-sm-12">
@@ -28,12 +30,18 @@
                         <th scope="row">{{$post->id}}</th>
                         <td style="max-width: 256px;">{{$post->caption}}</td>
                         <td>{{$post->created_at}}</td>
-                        <td>
-                            <form action="{{route('user.post.cancel')}}" method="post">
+                        <td class="d-flex justify-content-start">
+                            <form action="{{route('admin.post.deny')}}" class="mr-2" method="post">
                                 @method('patch')
                                 @csrf
                                 <input type="hidden" value="{{$post->id}}" name="id">
                                 <button class="btn btn-danger">Cancel</button>
+                            </form>
+                            <form action="{{route('admin.post.approve')}}" method="post">
+                                @method('patch')
+                                @csrf
+                                <input type="hidden" value="{{$post->id}}" name="id">
+                                <button class="btn btn-success">Approve</button>
                             </form>
                         </td>
                     </tr>
