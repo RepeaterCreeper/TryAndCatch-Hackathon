@@ -15,6 +15,9 @@
                                 </div>
                                 <div style="display: flex; flex-direction: column; justify-content: center;">
                                     <h3 style="margin: 0;">{{$post->user->first_name." ".$post->user->last_name}} <span class="badge badge-pill badge-small bg-primary" style="font-size: 12pt;">Mayor</span></h3>
+                                    @if ($post->image)
+                                        <img src="{{asset('storage/images/posts/'.$post->user->id.'/'.$post->image)}}" class="img-fluid my-4 w-50" alt="image">
+                                    @endif
                                     <small>{{$post->created_at->diffForHumans()}}</small>
                                 </div>
                             </div>
@@ -33,7 +36,6 @@
             <h1 class="m-4">Recent Admin Posts</h1>
         </div>
         @foreach($posts as $post)
-            @if (!$post->important)
                 <div class="col-sm-6 my-2">
                     <div class="card mx-4 p-4 shadow border-primary">
                         <div class="card-content" style="display: flex; flex-direction: column; gap: 16px;">
@@ -52,8 +54,6 @@
                         </div>
                     </div>
                 </div>
-            @endif
         @endforeach
-
     </div>
 @endsection

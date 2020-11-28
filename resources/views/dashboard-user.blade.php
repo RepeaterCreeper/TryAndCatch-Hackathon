@@ -62,7 +62,7 @@
                 <div class="card-body">
                     <h3 style="margin-bottom: 0; font-weight: bolder;">Need an appointment?</h3>
                     <p>Schedule one today.</p>
-                    <button class="btn btn-primary">Schedule an Appointment</button>
+                    <a href="{{route('user.appointnment')}}" class="btn btn-primary">Schedule an Appointment</a>
                 </div>
             </div>
         </div>

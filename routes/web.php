@@ -55,6 +55,8 @@ Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dash
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');
 Route::get('/user/post/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.post.store');
 Route::patch('/user/post/cancel', [App\Http\Controllers\UserController::class, 'cancel'])->name('user.post.cancel');
+Route::get('/appointment', [App\Http\Controllers\UserController::class, 'appointmentShow'])->name('user.appointnment');
+Route::post('/appointment/store', [App\Http\Controllers\UserController::class, 'appointmentStore'])->name('user.appointnment.store');
 
 //Reports
 Route::post('/user/report', [App\Http\Controllers\UserController::class, 'report'])->name('user.report');

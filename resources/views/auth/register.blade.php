@@ -60,12 +60,10 @@
                         <div class="form-group row">
                             <label for="birthdate"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Birthdate') }}</label>
-
                             <div class="col-md-6">
                                 <input id="birthdate" type="date"
                                     class="form-control @error('birthdate') is-invalid @enderror" name="birthdate"
                                     value="{{ old('birthdate') }}"  autocomplete="birthdate" autofocus>
-
                                 @error('birthdate')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

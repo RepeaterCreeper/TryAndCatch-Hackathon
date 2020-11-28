@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -85,5 +86,36 @@ class UserController extends Controller
             'calamities_id'=>1
         ]);
         return redirect()->back()->with('message','Your report has been sent.');
+    }
+
+    public function appointmentShow()
+    {
+        $data = auth()->user()->appointment()->get();
+        return view('appointment-user',compact('data'));
+    }
+
+    public function appointmentStore(Request $request)
+    {
+        $rules = [
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+        ];
+        $message = [
+            'date.required' => 'You need to set a date for your appointment',
+            'time.required' => 'Time is needed for your appointment',
+            'date.date' => 'This field must be a valid date',
+            'time.time' => 'It looks like, you haven\'t set the time.',
+        ];
+        $validator = Validator::make($request->all(),$rules,$message);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $date = Carbon::parse($request->date." ".$request->time);
+        auth()->user()->appointment()->create([
+            'schedule'=>$date,
+            'status'=>'pending',
+        ]);
+        return redirect()->back()->with("message",'Appointment has been set successfully');
     }
 }
