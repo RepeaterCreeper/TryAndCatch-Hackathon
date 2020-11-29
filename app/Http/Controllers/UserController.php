@@ -118,4 +118,88 @@ class UserController extends Controller
         ]);
         return redirect()->back()->with("message",'Appointment has been set successfully');
     }
+
+    public function documentShow()
+    {
+        if(auth()->user()->roles_id == 1) abort(404);
+        return view('document-user');
+    }
+
+    public function simpleDocument(Request $request)
+    {
+
+        $rules = [
+            'full_name' => 'required|string|max:250|min:2',
+            'type' => 'required|string|max:250|min:2',
+            'purpose' => 'required|string|max:500|min:5',
+        ];
+
+        if($request->type == "certguardianship"){
+            $rules['guardian_name'] =  'required|string|max:250|min:2';
+        }
+        if($request->type == "brgclearance"){
+            $rules['title'] =  'required|string';
+            $rules['civil_status'] =  'required|string';
+            $rules['age'] =  'required|numeric';
+            $rules['residence_number'] =  'required|numeric';
+        }
+        if($request->type == "brgclearance_businesspermit"){
+            $rules['residence_number'] =  'required|numeric';
+            $rules['business_type'] =  'required|string';
+            $rules['business_location'] =  'required|string';
+            $rules['business_ownership'] =  'required|string';
+            $rules['business_ownership_other'] =  'string';
+            $rules['sketch_map'] =  'image';
+            $rules['age'] =  'required|numeric';
+            $rules['residence_number'] =  'required|numeric';
+            $rules['contact_number'] =  ['required', 'numeric', 'digits_between:11,12'];
+        }
+
+        $message = [
+            'full_name.required' => 'Please do not leave the the full name empty',
+            'full_name.max' => 'Full name can only contains 2-250 characters',
+            'full_name.min' => 'Full name can only contains 2-250 characters',
+            'civil_status.required' => 'Please do not leave the the civil status field empty',
+            'civil_status.max' => 'Civil status can only contains 2-250 characters',
+            'civil_status.min' => 'Civil status can only contains 2-250 characters',
+            'guardian_name.required' => 'Please do not leave the the Guardian name empty',
+            'guardian_name.max' => 'Guardian name can only contains 2-250 characters',
+            'guardian_name.min' => 'Guardian name can only contains 2-250 characters',
+            'type.required' => 'Please do not leave the the type field empty',
+            'type.max' => 'Type field can only contains 2-250 characters',
+            'type.min' => 'Type field can only contains 2-250 characters',
+            'purpose.required' => 'Please do not leave the the purpose field empty',
+            'purpose.max' => 'Purpose field can only contains 5-500 characters',
+            'purpose.min' => 'Purpose field can only contains 5-500 characters',
+            'string' => 'All of this field must include a letter/characters',
+        ];
+        $validator = Validator::make($request->all(),$rules,$message);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+        auth()->user()->document()->create($validator->validated());
+
+        return redirect()->back()->with("message","Your request for the document has been sent.");
+    }
+
+    public function supportUser()
+    {
+        if(auth()->user()->roles_id == 1) abort(404);
+        $messages = auth()->user()->message->sortBy('created_at');
+        return view('support-user',compact('messages'));
+    }
+
+    public function messageStore(Request $request)
+    {
+        if(auth()->user()->roles_id == 1) abort(404);
+
+        $request->validate([
+            'message'=>"required",
+        ]);
+        auth()->user()->message()->create([
+            'message'=>$request->message,
+            'email' => auth()->user()->email
+        ]);
+        return redirect(route('admin.support')."#here")->with('success','Message Sent!');
+    }
 }

@@ -43,6 +43,9 @@ Route::put('/post/star', [App\Http\Controllers\AdminController::class, 'star'])-
 Route::put('/post/star/remove', [App\Http\Controllers\AdminController::class, 'remove'])->name('post.star.remove');
 Route::post('/push/notif', [App\Http\Controllers\AdminController::class, 'notif'])->name('admin.push.notif');
 Route::delete('/push/delete/{notif}', [App\Http\Controllers\AdminController::class, 'deleteNotif'])->name('admin.notif.delete');
+Route::get('/support-admin', [App\Http\Controllers\AdminController::class, 'supportAdmin'])->name('supportAdmin');
+Route::get('/chatroom/{user}', [App\Http\Controllers\AdminController::class, 'chatRoom'])->name('chatroom');
+Route::patch('/chatroom/store/{user}', [App\Http\Controllers\AdminController::class, 'chatRoomStore'])->name('admin.store');
 
 //Covid Case
 Route::post('/post/covid/new', [App\Http\Controllers\AdminController::class, 'covidNew'])->name('covid.new');
@@ -51,26 +54,21 @@ Route::get('/show/update/case', [App\Http\Controllers\AdminController::class, 'u
 Route::patch('/update/case/recover', [App\Http\Controllers\AdminController::class, 'recover'])->name('covid.update.recover');
 Route::patch('/update/case/deceased', [App\Http\Controllers\AdminController::class, 'deceased'])->name('covid.update.deceased');
 
+
 Route::get('/dashboard-user', [App\Http\Controllers\UserController::class, 'dashboard'])->name('user.dashboard');
 Route::get('/posts-user', [App\Http\Controllers\UserController::class, 'posts'])->name('user.posts');
 Route::get('/user/post/store', [App\Http\Controllers\UserController::class, 'store'])->name('user.post.store');
 Route::patch('/user/post/cancel', [App\Http\Controllers\UserController::class, 'cancel'])->name('user.post.cancel');
+
+//Documents form
+Route::get('/document-user', [App\Http\Controllers\UserController::class, 'documentShow'])->name('user.document');
+Route::get('/support-user', [App\Http\Controllers\UserController::class, 'supportUser'])->name('admin.support');
+Route::post('/simple/document/store', [App\Http\Controllers\UserController::class, 'simpleDocument'])->name('simple.document.store');
 Route::get('/appointment', [App\Http\Controllers\UserController::class, 'appointmentShow'])->name('user.appointnment');
 Route::post('/appointment/store', [App\Http\Controllers\UserController::class, 'appointmentStore'])->name('user.appointnment.store');
+Route::patch('/message/store', [App\Http\Controllers\UserController::class, 'messageStore'])->name('user.message.store');
 
 //Reports
 Route::post('/user/report', [App\Http\Controllers\UserController::class, 'report'])->name('user.report');
 Route::post('/user/report', [App\Http\Controllers\UserController::class, 'report'])->name('user.report');
 
-
-Route::get('/appointment-user', function() {
-    return view('appointment-user');
-});
-
-Route::get('/document-user', function() {
-    return view('document-user');
-});
-
-Route::get('/support-user', function() {
-    return view('support-user');
-});

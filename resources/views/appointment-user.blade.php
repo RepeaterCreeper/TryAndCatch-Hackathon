@@ -17,7 +17,7 @@
                             <div class="col-md-12">
                                 <input type="date" class="form-control is-invalid" name="date"
                                        autocomplete="date" autofocus>
-                                @error('appointment_date')
+                                @error('date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -29,7 +29,7 @@
                             <div class="col-md-12">
                                 <input type="time" class="form-control is-invalid" name="time"
                                        autocomplete="appointment_time" autofocus>
-                                @error('appointment_time')
+                                @error('time')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

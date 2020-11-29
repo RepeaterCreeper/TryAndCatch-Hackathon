@@ -52,7 +52,7 @@
                             @endif
                         @endforeach
                         <div class="card-footer" id="here">
-                            <form class="input-group mb-3" action="{{route('user.message.store',$message->user_id)}}" method="post">
+                            <form class="input-group mb-3" action="{{route('admin.store',$message->user_id)}}" method="post">
                                 @method('patch')
                                 @csrf
                                 <input type="text" class="form-control @error('message') is-invalid @enderror @if(session('success')) is-valid @endif" name="message" placeholder="Your message..."

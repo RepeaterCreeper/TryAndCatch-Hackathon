@@ -71,7 +71,7 @@
                 <div class="card-body">
                     <h3 style="margin-bottom: 0; font-weight: bolder;">Get Documents</h3>
                     <p>Do you require a document? View all documents that you can request.</p>
-                    <button class="btn btn-primary">View Documents</button>
+                    <a href="{{route('user.document')}}" class="btn btn-primary">View Documents</a>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <h3 style="margin-bottom: 0; font-weight: bolder;">Admin Support</h3>
                     <p>Having problems? Need to chat with the admin?</p>
-                    <button class="btn btn-primary">Chat with Admin</button>
+                    <a href="{{route('admin.support')}}" class="btn btn-primary">Chat with Admin</a>
                 </div>
             </div>
         </div>

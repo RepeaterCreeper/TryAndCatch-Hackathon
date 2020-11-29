@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CovidCase;
+use App\Models\Message;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Report;
@@ -241,5 +242,31 @@ class AdminController extends Controller
     {
         $notif->update(['status'=>false]);
         return redirect()->back()->with('message','Notification has been removed.');
+    }
+
+    public function supportAdmin()
+    {
+        $messages = Message::all()->groupBy('user_id');
+        return view('support-admin',compact('messages'));
+    }
+
+    public function chatRoom(User $user)
+    {
+        $messages = $user->message;
+        return view("chatroom",compact('messages'));
+    }
+    public function chatRoomStore($user,Request $request)
+    {
+        $request->validate([
+            'message'=>"required",
+        ]);
+
+        Message::create([
+            'email' => auth()->user()->email,
+            'message' => $request->message,
+            'user_id' => $user
+        ]);
+
+        return redirect(route('chatroom',$user)."#here")->with('success','Message Sent!');
     }
 }
