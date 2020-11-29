@@ -24,8 +24,16 @@ You're good to go!
 
 
 To sign in as admin use this credentials:
+
 username: j.doe@trycatch.com
+
 password: 123
+
+
+Before running the app 
+//Comment this line of code on your AppserviceProvider, then migrate and uncomment again
+`$notifs = Notification::where(['status'=>true])->orderBy('created_at','desc')->limit(2)->get();
+view()->share('notifs',$notifs);`
 
 -Team TryAndCatch
 
