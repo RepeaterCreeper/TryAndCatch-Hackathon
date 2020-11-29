@@ -22,5 +22,10 @@ Then Run: `npm install && npm run dev` again
 
 You're good to go!
 
+
+To sign in as admin use this credentials:
+username: j.doe@trycatch.com
+password: 123
+
 -Team TryAndCatch
 
