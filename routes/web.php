@@ -74,3 +74,7 @@ Route::get('/document-user', function() {
 Route::get('/support-user', function() {
     return view('support-user');
 });
+
+Route::get('/document-admin', function() {
+    return view('document-admin');
+});

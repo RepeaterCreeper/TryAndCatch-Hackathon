@@ -26,6 +26,10 @@ class AdminController extends Controller
     }
 
 
+    public function document() {
+        return view('document-admin');
+    }
+
     public function remove(Request $request)
     {
         $post = Post::find($request->id);
