@@ -27,6 +27,7 @@ class AdminController extends Controller
     }
 
 
+
     public function remove(Request $request)
     {
         $post = Post::find($request->id);

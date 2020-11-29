@@ -70,6 +70,9 @@
                         <li class="nav-item {{Request::is('statistics-admin') ? 'active' : ''}}">
                             <a class="nav-link" href="{{route('admin.statistics')}}"><i class="fas fa-chart-bar"></i> Statistics (Admin)</a>
                         </li>
+                            <li class="nav-item {{Request::is('support-admin') ? 'active' : ''}}">
+                                <a class="nav-link" href="{{route('supportAdmin')}}"><i class="fas fa-chart-bar"></i> Chatroom (Admin)</a>
+                            </li>
                     @endif
                     @endauth
                 </ul>
